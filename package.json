@@ -6,7 +6,7 @@
   "author": "",
   "main": "index.ts",
   "scripts": {
-    "start": "ts-node-dev src/index.ts"
+    "dev": "ts-node-dev src/index.ts"
   },
   "dependencies": {
     "express": "^5.2.1"
