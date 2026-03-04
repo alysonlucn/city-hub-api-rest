@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { StatusCodes } from 'http-status-codes';
+import { CitiesController } from '../controllers';
 
 const router = Router();
 
@@ -7,10 +8,6 @@ router.get('/', (req, res) => {
   res.send('Hello, World!');
 });
 
-router.post('/data', (req, res) => {
-  const data = req.body;
-
-  res.status(StatusCodes.UNAUTHORIZED).json({ data });
-});
+router.post('/cities', CitiesController.create);
 
 export { router };
