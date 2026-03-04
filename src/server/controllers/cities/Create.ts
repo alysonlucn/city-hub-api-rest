@@ -1,13 +1,30 @@
-import { Request, Response } from "express"; 
+import { Request, Response } from 'express'; 
+import * as yup from 'yup';
 
 interface ICity {
     name: string;
 };
 
-export const create = (req: Request, res: Response) =>{
-    const data: ICity = req.body;
+const bodyValidation: yup.ObjectSchema<ICity> = yup.object().shape({
+    name: yup.string().required().min(3),
+});
 
-    console.log(data.name);
+export const create = async(req: Request<{}, {}, ICity>, res: Response) =>{
+    let validateData: ICity | undefined;
+
+    try {
+       validateData = await bodyValidation.validate(req.body);
+    } catch (error) {
+        const yupError = error as yup.ValidationError;
+
+        return res.json({
+            error: {
+                default: yupError.message,
+            }
+        });
+    }
+
+    console.log(validateData);
 
     return res.send("Create city");
 };
