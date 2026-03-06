@@ -1,3 +1,4 @@
+import './shared/services/YupTranslation';
 import express from 'express';
 import { router } from './routes';
 
